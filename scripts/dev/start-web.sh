@@ -2,7 +2,7 @@
 set -euo pipefail
 REPO="$(cd "$(dirname "$0")/../.." && pwd)"
 WEB_DIR="$REPO/apps/web"
-PORT=3014
+PORT=3016
 LOG="/Users/mac/.doc-cloud/logs/enterprise-product-design-frontend.log"
 
 pkill -f "PORT=$PORT.*standalone/server.js" 2>/dev/null || true

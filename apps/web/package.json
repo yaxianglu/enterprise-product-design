@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0 -p 3010",
+    "dev": "next dev -H 0.0.0.0 -p 3016",
     "build": "next build",
     "copy:standalone-assets": "mkdir -p .next/standalone/.next && rm -rf .next/standalone/.next/static && cp -R .next/static .next/standalone/.next/static && if [ -d public ]; then rm -rf .next/standalone/public && cp -R public .next/standalone/public; fi",
-    "start": "npm run copy:standalone-assets && HOSTNAME=0.0.0.0 PORT=3010 node .next/standalone/server.js",
+    "start": "npm run copy:standalone-assets && HOSTNAME=0.0.0.0 PORT=3016 node .next/standalone/server.js",
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
