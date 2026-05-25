@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     if (isFormPost) return NextResponse.redirect(new URL('/login?error=invalid', req.url))
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
   }
-  const token = await signToken({ user_id: user.id, username: user.username, role: user.role })
+  const token = await signToken({ user_id: user.id, org_id: user.org_id ?? 'default', username: user.username, role: user.role })
 
   if (isFormPost) {
     const host = req.headers.get('host') ?? 'luyaxiang.com'

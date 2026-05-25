@@ -6,14 +6,18 @@ const SECRET = new TextEncoder().encode(
 )
 export const COOKIE_NAME = 'ai_demo_token'
 const EXPIRES_IN = '7d'
+const REFRESH_THRESHOLD_S = 60 * 60 * 24 // refresh if < 1 day remaining
 
 export interface JwtPayload {
   user_id: string
+  org_id: string
   username: string
   role: string
+  exp?: number
+  iat?: number
 }
 
-export async function signToken(payload: JwtPayload): Promise<string> {
+export async function signToken(payload: Omit<JwtPayload, 'exp' | 'iat'>): Promise<string> {
   return new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -38,11 +42,18 @@ export async function getSession(): Promise<JwtPayload | null> {
 }
 
 export function cookieOptions() {
+  const isProd = process.env.NODE_ENV === 'production'
   return {
     httpOnly: true,
-    secure: false,
+    secure: isProd,
     sameSite: 'lax' as const,
     maxAge: 60 * 60 * 24 * 7,
     path: '/',
   }
+}
+
+export function shouldRefreshToken(payload: JwtPayload): boolean {
+  if (!payload.exp) return false
+  const remainingS = payload.exp - Math.floor(Date.now() / 1000)
+  return remainingS < REFRESH_THRESHOLD_S
 }
