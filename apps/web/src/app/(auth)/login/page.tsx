@@ -40,7 +40,7 @@ function LoginForm() {
           <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-50 rounded-xl mb-4">
             <span className="text-2xl">🎨</span>
           </div>
-          <h1 className="text-xl font-bold text-slate-900">AI 商品图设计生成器</h1>
+          <h1 className="text-xl font-bold text-slate-900">AI 商品图展示设计生成器</h1>
           <p className="text-sm text-slate-500 mt-1">请登录以开始使用</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
